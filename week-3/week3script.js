@@ -46,7 +46,7 @@ leaflet.onload = function()
 {
   console.log('loaded script');
 
-	var map = L.map('map').setView([51.505, -0.09], 13);
+	var map = L.map('map').setView([55.93, -3.30], 12);
 	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
