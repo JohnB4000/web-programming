@@ -4,8 +4,28 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<link rel="stylesheet" href="styles.css" type="text/css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+	 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 	<script src="week3script.js"></script>
+	<pre class="mermaid">
+		gantt
+		dateFormat  DD-MM-YY
+			section To-Do
+			F28SGLab1   :         a1, 29-09-23, 1w
+			F28SGLab2   :         a2, 29-09-23, 2w
+			F28SGLab3   :         a3, 29-09-23, 3w
+			F28SGLab4   :         a4, after a1, 3w
+			F28SGLab5   :         a5, after a2, 3w
+			F28SGLab6   :         a6, after a3, 3w
+			F28SGLab7   :         a7, after a4, 3w
+	</pre>
+
+	<div id="map"></div>
+
+	<h1 class="font-bold underline">This is a title</h1>
+	<p>This is a paragraph</p>
 </body>
 </html>

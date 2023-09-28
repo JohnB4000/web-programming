@@ -8,7 +8,7 @@ script.setAttribute('data-height', '40px');
 script.setAttribute('data-position', 'top');
 script.setAttribute('data-message', "We use cookies! Aren't they delicious!");
 script.setAttribute('data-bg', 'navy');
-script.setAttribute('data-fg', 'pink');
+script.setAttribute('data-fg', 'white');
 document.head.appendChild(script); 
 
 script.onload = function()
@@ -16,5 +16,40 @@ script.onload = function()
   console.log('loaded script');
 
 //   console.log( initCookieConsent );
+}
+console.log('ready');
+
+var mermaid = document.createElement('script');
+mermaid.type = 'text/javascript';
+mermaid.src = 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.4.0/mermaid.min.js';
+mermaid.id = 'cookiebanner';
+mermaid.setAttribute('data-fg', 'pink');
+document.head.appendChild(mermaid); 
+
+mermaid.onload = function()
+{
+  console.log('loaded script');
+
+//   console.log( initCookieConsent );
+}
+console.log('ready');
+
+
+var leaflet = document.createElement('script');
+leaflet.type = 'text/javascript';
+leaflet.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';
+leaflet.id = 'cookiebanner';
+leaflet.setAttribute('data-fg', 'pink');
+document.head.appendChild(leaflet); 
+
+leaflet.onload = function()
+{
+  console.log('loaded script');
+
+	var map = L.map('map').setView([51.505, -0.09], 13);
+	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
 }
 console.log('ready');
