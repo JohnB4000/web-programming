@@ -27,5 +27,13 @@
 
 	<h1 class="font-bold underline text-slate-500 bg-[#94a3b8]">This is a title</h1>
 	<p class="italic text-[#84cc16] hover:not-italic">This is a paragraph</p>
+
+	<form onsubmit="return checkData()"
+    action="echo.php">
+    Name <input name="Name" id="user" size="40"> <p>
+    Sex <select name="Sex">
+    <option> male <option selected> female </select>
+    Age <input name="Age" id="age" size="3"> <input type="submit">
+</form>
 </body>
 </html>
