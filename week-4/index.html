@@ -8,26 +8,29 @@
 <body>
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<script> 
+
 		$(document).ready(function(){ 
 			// JQuery Lab
 			$("#divContent").click(function(){ 
 				$("#divContent").load("https://api.github.com/repositories/2126244/commits?per_page=1"); 
 			});
-
-			// AJAX Lab 
 			getContents();
-
 		});
-		
+
 		function getContents(){
-             $.ajax({
-                 url: 'https://f28wp.github.io/material/tasks/Task%2008%20-%20AJAX%20&%20JSON.html',
-                 success: function(data) {
-                    console.log(data);
-                     $('#data').html( data );
-                 }
-             });
-         }
+			$.ajax({
+				url: '../week-3/index.html',
+				//  url: 'https://f28wp.github.io/material/tasks/Task%2008%20-%20AJAX%20&%20JSON.html',
+				success: function(data) {
+					$('#data').html(data);
+				},
+				error: function (xhr, status, error) {
+					console.error("AJAX request failed:", error);
+				}
+			});
+		}
+
+					
 	</script> 
 	<style> 
 		body { 
@@ -37,7 +40,6 @@
 			color: green; 
 		} 
 	</style> 
-
 
 	<div id="divContent"> 
 		Default Content
