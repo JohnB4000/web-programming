@@ -6,21 +6,34 @@
 	<title>Document</title>
 </head>
 <body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script> 
+	<script src="http://code.jquery.com/jquery.js"></script>
 	<script> 
 		$(document).ready(function(){ 
+			// JQuery Lab
 			$("#divContent").click(function(){ 
 				$("#divContent").load("https://api.github.com/repositories/2126244/commits?per_page=1"); 
-			}); 
-		}); 
+			});
+
+			// AJAX Lab 
+			getContents();
+
+		});
+		
+		function getContents(){
+             $.ajax({
+                 url: 'https://f28wp.github.io/material/tasks/Task%2008%20-%20AJAX%20&%20JSON.html',
+                 success: function(data) {
+                    console.log(data);
+                     $('#data').html( data );
+                 }
+             });
+         }
 	</script> 
 	<style> 
 		body { 
 			text-align: center; 
 		} 
 		#divContent { 
-			font-size: 40px; 
-			font-weight: bold; 
 			color: green; 
 		} 
 	</style> 
@@ -29,6 +42,8 @@
 	<div id="divContent"> 
 		Default Content
 	</div> 
+
+	<span id="data"></span>
 	
 </body>
 </html>
