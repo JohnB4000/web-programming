@@ -12,3 +12,6 @@ This week was using CDNJS. I have included the cookie banner, mermaid, leaflet a
 
 ## Week 4
 This week's tasks are related to JQuery, AJAX & JSON.
+
+## Week 5
+This week is about XML and RSS. The task was to play around with RSS feeds and parse the XML response. I've used two RSS feeds so far Fox News from the example and New York Times and parsed the response into the HTML.
