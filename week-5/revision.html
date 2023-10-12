@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		#ta0 {
+			background-color: lightblue;
+			color: grey;
+			width: 100%;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+	<script>
+		$(function () {
+			var text = "";
+
+			var $div = $(document.createElement('textarea')).appendTo('body');
+			$div.attr('id', 'ta0');
+
+			var $loadbutton = $('<button>Load</button>').appendTo('body');
+			var $savebutton = $('<button>Save</button>').appendTo('body');
+			var $textarea   = $(document.createElement('textarea')).appendTo('body');
+			$textarea.val( 'enter text' );
+
+			$savebutton.click(function() {
+				let  json = JSON.stringify($textarea.val());
+				let blob = new Blob([json], {type: "octet/stream"});
+				let url = window.URL.createObjectURL(blob);
+				let a = document.createElement("a");
+				a.href = url;
+				a.download = 'afile.json';
+				a.click();
+				window.URL.revokeObjectURL(url);
+			});
+		});
+
+	</script>
+</body>
+</html>
