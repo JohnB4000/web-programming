@@ -80,6 +80,11 @@ header p {
 	margin-bottom: 10px;
 }
 
+#news-stories article img {
+	max-width: 100%;
+	margin-top: 10px;
+}
+
 #news-stories article a {
 	margin-top: 15px;
 	text-align: center;

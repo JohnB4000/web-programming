@@ -21,10 +21,13 @@ function createArticles(data, source) {
 		let title = $(story).find('title').text();
 		let description = $(story).find('description').text();
 		let guid = $(story).find('guid').text();
+		let mediaContent = $(story).find('media\\:content');
+		let url = mediaContent.attr('url');
 		
 		let article = $('<article></article>');
 		article.append($("<h3>").text(title));
 		article.append($("<p>").text(description));
+		if (url) article.append($('<img>').attr('src', url).text(''));
 		if (guid) article.append($("<a>").attr("href", guid).text("Read More"));
 		article.hide();
 		$("#news-stories").append(article);
