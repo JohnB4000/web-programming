@@ -15,7 +15,8 @@ async function fetchData(url) {
 
 function createArticles(data, source) {
 	$("#news-stories").empty();
-	$("#news-stories").append($("<h2>").text(source).fadeIn(300));
+	$("#source").empty();
+	$("#source").append($("<h2>").text(source).fadeIn(300));
 	data.forEach((story) => {
 		let title = $(story).find('title').text();
 		let description = $(story).find('description').text();
