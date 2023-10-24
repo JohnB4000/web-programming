@@ -5,22 +5,41 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 </head>
-<body onload="displayWebStore()">
-	<h3>Web Storage</h3>
+<body onload="loadEverything()">
+	<section id="web-storage">
+		<h3>Web Storage</h3>
+	
+		<div id="WSData" style="margin-left: 1em"></div>
+	
+		<form action=""> 
+			<p>
+				Key <input id="key" value=""/>
+				Value <input id="val" value=""/>
+				<input type="button" value="update" onclick="updateWebStore()">
+			</p> 
+			<p>
+				<input type="button" value="clear store" onclick="clearWebStore()">
+				<input type="reset" value="reset form">
+			</p>
+		</form>
+	</section>
 
-	<div id="WSData" style="margin-left: 1em"></div>
+	<section id="cookies">
+		<h3>Cookies</h3>
 
-	<form action=""> 
-		<p>
-			Key <input id="key" value=""/>
-			Value <input id="val" value=""/>
-			<input type="button" value="update" onclick="updateWebStore()">
-		</p> 
-		<p>
-			<input type="button" value="clear store" onclick="clearWebStore()">
-			<input type="reset" value="reset form">
-		</p>
-	</form>
+		<div id="currentCookies"></div>
+
+		<form action="">
+			<p>
+				Value <input id="cookieVal" type="text" value="">
+				<input type="button" value="update" onclick="setCookie()">
+			</p>
+			<p>
+				<input type="button" value="delete cookie" onclick="deleteCookie()">
+				<input type="reset" value="reset form">
+			</p>
+		</form>
+	</section>
 	<script src="index.js"></script>
 </body>
 </html>

@@ -28,3 +28,66 @@ function clearWebStore() {
     db.clear();
     displayWebStore();
 }
+
+function Cookie(name, value, days) {
+    d=new Date();
+    if ( days < 0 ) { 
+        d.setTime(0); 
+    } else { 
+        d.setTime(d.getTime() + days * 24*60*60*1000); 
+    }
+    return name + "=\"" + value + "\"; Expires=\"" + d.toUTCString() + "\"" + "; Path=/";
+}
+
+function displayCookies() {
+	var arr = getCookieNames();
+	console.log(arr);
+	let s = ""
+	for (var j = 0; j < arr.length; j++) {
+		var val = getCookieValue(arr[j]);
+		if ( val != null ) {
+			s += arr[j] + " = " + unescape(val) + "<br>";
+		}
+		document.getElementById("currentCookies").innerHTML = s;
+	}
+}
+
+function setCookie() {
+	let value = document.getElementById("cookieVal").value;
+	let c = Cookie("name", value, 1);
+	document.cookie = c;
+    console.log("Cookie set: " + c);
+	displayCookies();
+}
+
+function deleteCookie() {
+	let c = Cookie("name", "", -1);
+	document.cookie = c;
+	console.log("Cookie set: " + c);
+	displayCookies();
+}
+
+function getCookieNames() {
+	console.log("Here" + document.cookie)
+    if ( document.cookie == "" ) return new Array();
+    var c = document.cookie.split(";");
+    var names = new Array(c.length);
+    for (var i=0; i<c.length; i++)
+        names[i] = c[i].substr(0, c[i].indexOf("="));
+    return names;
+}
+
+function getCookieValue(name) {
+    var cs = document.cookie.split(";");
+    for (var k=0; k<cs.length; k++) {
+        Nam = cs[k].substr(0, cs[k].indexOf("="));
+        Val = cs[k].substr(cs[k].indexOf("=") + 1);
+        if ( Nam == name )
+            return unescape(Val);
+    }
+    return null;
+}
+function loadEverything() {
+	displayWebStore();
+	displayCookies();
+}
