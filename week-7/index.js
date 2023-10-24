@@ -41,7 +41,6 @@ function Cookie(name, value, days) {
 
 function displayCookies() {
 	var arr = getCookieNames();
-	console.log(arr);
 	let s = ""
 	for (var j = 0; j < arr.length; j++) {
 		var val = getCookieValue(arr[j]);
@@ -53,22 +52,23 @@ function displayCookies() {
 }
 
 function setCookie() {
+	let name = document.getElementById("cookieKey").value;
 	let value = document.getElementById("cookieVal").value;
-	let c = Cookie("name", value, 1);
+	let c = Cookie(name, value, 1);
 	document.cookie = c;
     console.log("Cookie set: " + c);
 	displayCookies();
 }
 
 function deleteCookie() {
-	let c = Cookie("name", "", -1);
+	let name = document.getElementById("cookieKey").value;
+	let c = Cookie(name, "", -1);
 	document.cookie = c;
 	console.log("Cookie set: " + c);
 	displayCookies();
 }
 
 function getCookieNames() {
-	console.log("Here" + document.cookie)
     if ( document.cookie == "" ) return new Array();
     var c = document.cookie.split(";");
     var names = new Array(c.length);
