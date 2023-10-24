@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body onload="displayWebStore()">
+	<h3>Web Storage</h3>
+
+	<div id="WSData" style="margin-left: 1em"></div>
+
+	<form action=""> 
+		<p>
+			Key <input id="key" value=""/>
+			Value <input id="val" value=""/>
+			<input type="button" value="update" onclick="updateWebStore()">
+		</p> 
+		<p>
+			<input type="button" value="clear store" onclick="clearWebStore()">
+			<input type="reset" value="reset form">
+		</p>
+	</form>
+	<script src="index.js"></script>
+</body>
+</html>
