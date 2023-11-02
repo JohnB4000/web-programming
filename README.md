@@ -21,3 +21,6 @@ I also decided to make an improved version that is seperate for week 6. It has t
 
 ## Week 7
 This week we explored storage in the form of web storage, cookie and session cookies. I implemented the web storage example from the notes. I then created a cookie set and delete form similar to the web storage but for cookies based off the notes but extended to allow the user to set the name as well as the value of the cookie and then fetch and display any cookies stored for that domain. However, because I used VS Code's live server hosted on localhost it requires the domain to be removed from the cookie parameters.
+
+## Week 8
+This week was about Node.js and experimenting with its features. This incudes express.js, pug templates routing and socket.io. I created implemented basic routing with express, then improved it with the router handler and then played around with pug templates. I also implented the chatroom server to explorer how it works and may add extra features.
