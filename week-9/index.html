@@ -7,13 +7,14 @@
 </head>
 <body>
 	<form id="form" action="">
-		<input type="text" name="new-to-do" id="new-to-do">
+		<input type="text" name="new-to-do" id="new-to-do" autocomplete="off">
 		<input type="submit" value="Create New To Do">
 	</form>
 	<section id="to-dos">
 
 	</section>
 </body>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script>
     var socket = io();
 
@@ -29,7 +30,7 @@
       }
     });
 
-    socket.on('to-dos', function(toDoName) {
+    socket.on('add-new-to-do', function(toDoName) {
       var toDoItem = document.createElement('p');
       toDoItem.textContent = toDoName;
       toDos.appendChild(toDoItem);
