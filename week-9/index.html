@@ -14,5 +14,25 @@
 
 	</section>
 </body>
+<script>
+    var socket = io();
 
+    var form = document.getElementById('form');
+    var newToDo = document.getElementById('new-to-do');
+    var toDos = document.getElementById('to-dos');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (newToDo.value) {
+        socket.emit('new-to-do', newToDo.value);
+        newToDo.value = '';
+      }
+    });
+
+    socket.on('to-dos', function(toDoName) {
+      var toDoItem = document.createElement('p');
+      toDoItem.textContent = toDoName;
+      toDos.appendChild(toDoItem);
+    });
+  </script>
 </html>
