@@ -30,10 +30,23 @@
       }
     });
 
-    socket.on('add-new-to-do', function(toDoName) {
-      var toDoItem = document.createElement('p');
-      toDoItem.textContent = toDoName;
+    socket.on('add-new-to-do', function(toDoName, toDoId) {
+      var toDoItem = document.createElement('div');
+	  var toDoTitle = document.createElement('p');
+      toDoTitle.textContent = toDoName;
+	  toDoItem.appendChild(toDoTitle);
+	  var deleteButton = document.createElement('button');
+	  deleteButton.innerText = "Delete";
+	  deleteButton.id = 'to-do-id-' + toDoId;
+	  deleteButton.addEventListener('click', function(e) {
+		socket.emit('delete-to-do', toDoId);
+	  })
+	  toDoItem.appendChild(deleteButton);
       toDos.appendChild(toDoItem);
+    });
+
+	socket.on('delete-to-do-item', function(toDoId) {
+      toDos.removeChild(document.getElementById('to-do-id-' + toDoId).parentNode)
     });
   </script>
 </html>

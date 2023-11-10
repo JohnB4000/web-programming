@@ -9,10 +9,14 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+var toDoId = 0;
+
 io.on('connection', (socket) => {
   socket.on('new-to-do', (msg) => {
-    io.emit('add-new-to-do', msg);
-	console.log(msg)
+    io.emit('add-new-to-do', msg, toDoId++);
+  });
+  socket.on('delete-to-do', (id) => {
+    io.emit('delete-to-do-item', id);
   });
 });
 
