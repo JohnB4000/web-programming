@@ -24,3 +24,6 @@ This week we explored storage in the form of web storage, cookie and session coo
 
 ## Week 8
 This week was about Node.js and experimenting with its features. This incudes express.js, pug templates routing and socket.io. I created implemented basic routing with express, then improved it with the router handler and then played around with pug templates. I also implented the chatroom server to explorer how it works and may add extra features.
+
+## Week 9
+This week since there were no lectures or labs I continued experimenting with Node.js, especially socket.io. I build a basic to do app. When someone creates a to do item it sends it to the server which alerts others connected to create a new to do with a id. It also allows you to delete to do items with a delete button. This also send the update to the server and its connected clients to also remove the to do item.
