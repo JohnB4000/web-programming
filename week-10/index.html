@@ -37,15 +37,25 @@
 		socket.on("add-new-to-do", function (toDoName, toDoId) {
 			var toDoItem = document.createElement("div");
 			toDoItem.className = "to-do-item";
+
+			var item = document.createElement("div");
+			toDoItem.appendChild(item);
+
+			var checkbox = document.createElement("input");
+			checkbox.setAttribute("type", "checkbox");
+			item.appendChild(checkbox);
+
 			var toDoTitle = document.createElement("p");
 			toDoTitle.textContent = toDoName;
-			toDoItem.appendChild(toDoTitle);
+			item.appendChild(toDoTitle);
+
 			var deleteButton = document.createElement("button");
 			deleteButton.innerText = "Delete";
 			deleteButton.id = "to-do-id-" + toDoId;
 			deleteButton.addEventListener("click", function (e) {
 				socket.emit("delete-to-do", toDoId);
 			});
+
 			toDoItem.appendChild(deleteButton);
 			toDos.appendChild(toDoItem);
 		});
