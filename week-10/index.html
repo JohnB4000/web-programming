@@ -45,7 +45,7 @@
 			checkbox.setAttribute("type", "checkbox");
 			checkbox.id = "checkbox-" + toDoId
 			checkbox.addEventListener("change", (event) => {
-				socket.emit("check-to-do", { toDoId: toDoId, state: event.currentTarget.checked })
+				socket.emit("check-to-do", toDoId, event.currentTarget.checked)
 			})
 			item.appendChild(checkbox);
 
@@ -69,8 +69,8 @@
 				document.getElementById("to-do-id-" + toDoId).parentNode
 			);
 		});
-		socket.on("check-to-do-item", function (data) {
-			document.getElementById("checkbox-" + data.toDoId).checked = data.state;
+		socket.on("check-to-do-item", function (toDoId, state) {
+			document.getElementById("checkbox-" + toDoId).checked = state;
 		});
 	</script>
 </html>
