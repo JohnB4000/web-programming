@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="styles.css">
-	<title>To Do App</title>
-</head>
-<body>
-	<form id="form" action="">
-		<input type="text" name="new-to-do" id="new-to-do" autocomplete="off">
-		<input type="submit" value="Create New To Do">
-	</form>
-	<section id="to-dos">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="styles.css" />
+		<title>To Do App</title>
+	</head>
+	<body>
+		<form id="form" action="">
+			<input
+				type="text"
+				name="new-to-do"
+				id="new-to-do"
+				autocomplete="off"
+			/>
+			<input type="submit" value="Create New To Do" />
+		</form>
+		<section id="to-dos"></section>
+	</body>
+	<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+	<script>
+		var socket = io();
 
-	</section>
-</body>
-<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-<script>
-    var socket = io();
+		var form = document.getElementById("form");
+		var newToDo = document.getElementById("new-to-do");
+		var toDos = document.getElementById("to-dos");
 
-    var form = document.getElementById('form');
-    var newToDo = document.getElementById('new-to-do');
-    var toDos = document.getElementById('to-dos');
+		form.addEventListener("submit", function (e) {
+			e.preventDefault();
+			if (newToDo.value) {
+				socket.emit("new-to-do", newToDo.value);
+				newToDo.value = "";
+			}
+		});
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (newToDo.value) {
-        socket.emit('new-to-do', newToDo.value);
-        newToDo.value = '';
-      }
-    });
+		socket.on("add-new-to-do", function (toDoName, toDoId) {
+			var toDoItem = document.createElement("div");
+			toDoItem.className = "to-do-item";
+			var toDoTitle = document.createElement("p");
+			toDoTitle.textContent = toDoName;
+			toDoItem.appendChild(toDoTitle);
+			var deleteButton = document.createElement("button");
+			deleteButton.innerText = "Delete";
+			deleteButton.id = "to-do-id-" + toDoId;
+			deleteButton.addEventListener("click", function (e) {
+				socket.emit("delete-to-do", toDoId);
+			});
+			toDoItem.appendChild(deleteButton);
+			toDos.appendChild(toDoItem);
+		});
 
-    socket.on('add-new-to-do', function(toDoName, toDoId) {
-      var toDoItem = document.createElement('div');
-	  toDoItem.className = "to-do-item";
-	  var toDoTitle = document.createElement('p');
-      toDoTitle.textContent = toDoName;
-	  toDoItem.appendChild(toDoTitle);
-	  var deleteButton = document.createElement('button');
-	  deleteButton.innerText = "Delete";
-	  deleteButton.id = 'to-do-id-' + toDoId;
-	  deleteButton.addEventListener('click', function(e) {
-		socket.emit('delete-to-do', toDoId);
-	  })
-	  toDoItem.appendChild(deleteButton);
-      toDos.appendChild(toDoItem);
-    });
-
-	socket.on('delete-to-do-item', function(toDoId) {
-      toDos.removeChild(document.getElementById('to-do-id-' + toDoId).parentNode)
-    });
-  </script>
+		socket.on("delete-to-do-item", function (toDoId) {
+			toDos.removeChild(
+				document.getElementById("to-do-id-" + toDoId).parentNode
+			);
+		});
+	</script>
 </html>

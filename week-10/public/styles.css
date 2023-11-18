@@ -17,12 +17,12 @@ form input {
 	padding: 5px 10px;
 }
 
-form input[type=submit] {
+form input[type="submit"] {
 	border: 2px solid black;
 	border-radius: 5px;
 }
 
-form input[type=submit]:hover {
+form input[type="submit"]:hover {
 	background-color: darkgrey;
 }
 
