@@ -35,8 +35,12 @@ app.get("/", (req, res) => {
 
 
 io.on("connection", (socket) => {
-	socket.on("new-to-do", (msg) => {
-		io.emit("add-new-to-do", msg, toDoId);
+	for (let i = 0; i < todos.length; i++) {
+		io.emit("add-new-to-do", todos[i].id, todos[i].name, todos[i].state)
+	}
+
+	socket.on("new-to-do", (msg, state) => {
+		io.emit("add-new-to-do", toDoId, msg, state);
 		todos.push({ id: toDoId++, name: msg, state: false })
 	});
 	socket.on("delete-to-do", (id) => {

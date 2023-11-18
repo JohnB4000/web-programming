@@ -26,15 +26,18 @@
 		var newToDo = document.getElementById("new-to-do");
 		var toDos = document.getElementById("to-dos");
 
+		var toDoIds = []
+
 		form.addEventListener("submit", function (e) {
 			e.preventDefault();
 			if (newToDo.value) {
-				socket.emit("new-to-do", newToDo.value);
+				socket.emit("new-to-do", newToDo.value, false);
 				newToDo.value = "";
 			}
 		});
 
-		socket.on("add-new-to-do", function (toDoName, toDoId) {
+		socket.on("add-new-to-do", function (toDoId, toDoName, state) {
+			toDoIds.push(toDoId)
 			var toDoItem = document.createElement("div");
 			toDoItem.className = "to-do-item";
 
@@ -44,6 +47,7 @@
 			var checkbox = document.createElement("input");
 			checkbox.setAttribute("type", "checkbox");
 			checkbox.id = "checkbox-" + toDoId
+			checkbox.checked = state
 			checkbox.addEventListener("change", (event) => {
 				socket.emit("check-to-do", toDoId, event.currentTarget.checked)
 			})
@@ -65,12 +69,15 @@
 		});
 
 		socket.on("delete-to-do-item", function (toDoId) {
+			toDoIds.filter(number => number !== toDoId);
 			toDos.removeChild(
 				document.getElementById("to-do-id-" + toDoId).parentNode
 			);
 		});
+
 		socket.on("check-to-do-item", function (toDoId, state) {
-			document.getElementById("checkbox-" + toDoId).checked = state;
+			if (!toDoIds.includes(toDoId))
+				document.getElementById("checkbox-" + toDoId).checked = state;
 		});
 	</script>
 </html>
