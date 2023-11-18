@@ -37,6 +37,9 @@
 		});
 
 		socket.on("add-new-to-do", function (toDoId, toDoName, state) {
+			if (toDoIds.includes(toDoId)) 
+				return
+			
 			toDoIds.push(toDoId)
 			var toDoItem = document.createElement("div");
 			toDoItem.className = "to-do-item";
@@ -76,8 +79,7 @@
 		});
 
 		socket.on("check-to-do-item", function (toDoId, state) {
-			if (!toDoIds.includes(toDoId))
-				document.getElementById("checkbox-" + toDoId).checked = state;
+			document.getElementById("checkbox-" + toDoId).checked = state;
 		});
 	</script>
 </html>
