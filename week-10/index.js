@@ -21,6 +21,9 @@ io.on("connection", (socket) => {
 	socket.on("delete-to-do", (id) => {
 		io.emit("delete-to-do-item", id);
 	});
+	socket.on("check-to-do", (data) => {
+		io.emit("check-to-do-item", data);
+	});
 });
 
 server.listen(3000, () => {

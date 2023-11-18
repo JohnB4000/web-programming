@@ -43,6 +43,10 @@
 
 			var checkbox = document.createElement("input");
 			checkbox.setAttribute("type", "checkbox");
+			checkbox.id = "checkbox-" + toDoId
+			checkbox.addEventListener("change", (event) => {
+				socket.emit("check-to-do", { toDoId: toDoId, state: event.currentTarget.checked })
+			})
 			item.appendChild(checkbox);
 
 			var toDoTitle = document.createElement("p");
@@ -64,6 +68,9 @@
 			toDos.removeChild(
 				document.getElementById("to-do-id-" + toDoId).parentNode
 			);
+		});
+		socket.on("check-to-do-item", function (data) {
+			document.getElementById("checkbox-" + data.toDoId).checked = data.state;
 		});
 	</script>
 </html>
