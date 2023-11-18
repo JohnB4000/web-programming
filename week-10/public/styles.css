@@ -14,6 +14,16 @@ form {
 
 form input {
 	margin: 0 10px;
+	padding: 5px 10px;
+}
+
+form input[type=submit] {
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+form input[type=submit]:hover {
+	background-color: darkgrey;
 }
 
 #to-dos {
