@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="styles.css" />
+		<title>To Do App</title>
+	</head>
+	<body>
+		<form id="form" action="">
+			<input
+				type="text"
+				name="new-to-do"
+				id="new-to-do"
+				autocomplete="off"
+			/>
+			<input type="submit" value="Create New To Do" />
+		</form>
+		<section id="to-dos"></section>
+	</body>
+	<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+	<script>
+		var socket = io();
+
+		var form = document.getElementById("form");
+		var newToDo = document.getElementById("new-to-do");
+		var toDos = document.getElementById("to-dos");
+
+		var toDoIds = []
+
+		form.addEventListener("submit", function (e) {
+			e.preventDefault();
+			if (newToDo.value) {
+				socket.emit("new-to-do", newToDo.value, false);
+				newToDo.value = "";
+			}
+		});
+
+		socket.on("add-new-to-do", function (toDoId, toDoName, state) {
+			if (toDoIds.includes(toDoId)) 
+				return
+			
+			toDoIds.push(toDoId)
+			var toDoItem = document.createElement("div");
+			toDoItem.className = "to-do-item";
+
+			var item = document.createElement("div");
+			toDoItem.appendChild(item);
+
+			var checkbox = document.createElement("input");
+			checkbox.setAttribute("type", "checkbox");
+			checkbox.id = "checkbox-" + toDoId
+			checkbox.checked = state
+			checkbox.addEventListener("change", (event) => {
+				socket.emit("check-to-do", toDoId, event.currentTarget.checked)
+			})
+			item.appendChild(checkbox);
+
+			var toDoTitle = document.createElement("p");
+			toDoTitle.textContent = toDoName;
+			item.appendChild(toDoTitle);
+
+			var deleteButton = document.createElement("button");
+			deleteButton.innerText = "Delete";
+			deleteButton.id = "to-do-id-" + toDoId;
+			deleteButton.addEventListener("click", function (e) {
+				socket.emit("delete-to-do", toDoId);
+			});
+
+			toDoItem.appendChild(deleteButton);
+			toDos.appendChild(toDoItem);
+		});
+
+		socket.on("delete-to-do-item", function (toDoId) {
+			toDoIds.filter(number => number !== toDoId);
+			toDos.removeChild(
+				document.getElementById("to-do-id-" + toDoId).parentNode
+			);
+		});
+
+		socket.on("check-to-do-item", function (toDoId, state) {
+			document.getElementById("checkbox-" + toDoId).checked = state;
+		});
+	</script>
+</html>
