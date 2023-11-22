@@ -27,3 +27,9 @@ This week was about Node.js and experimenting with its features. This incudes ex
 
 ## Week 9
 This week since there were no lectures or labs I continued experimenting with Node.js, especially socket.io. I build a basic to do app. When someone creates a to do item it sends it to the server which alerts others connected to create a new to do with a id. It also allows you to delete to do items with a delete button. This also send the update to the server and its connected clients to also remove the to do item.
+
+## Week 10
+I decided to extend the to do app by firstly give the page some styling with css. I then added a checkbox for each to do item that updated over socket io. I then added an array to store the to dos so when people connect after to dos have been created they can see it to.
+
+## Week 11
+I continued to work on the to do app this week. I added file system support so it writes the to dos to a csv file. This allows to dos to persist even if the server cycles. I also changed the way new to dos are sent over the socket io to use the object since I was storing it anyway instead of the individual variables.
