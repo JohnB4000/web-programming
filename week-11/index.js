@@ -8,7 +8,6 @@ var path = require("path");
 var fs = require("fs");
 
 const filePath = "todos.csv";
-let todoCount = 0;
 function readToDos() {
 	try {
 		const data = fs.readFileSync(filePath, "utf8");
@@ -28,6 +27,14 @@ function readToDos() {
 	}
 }
 
+let toDos = readToDos();
+let toDoCount;
+try {
+	toDoCount = toDos[toDos.length - 1].id;
+} catch (error) {
+	toDoCount = 0;
+}
+
 function writeToDos(data) {
 	const csvContent = [
 		"id,name,state",
@@ -45,6 +52,7 @@ function deleteToDo(data, id) {
 	for (let i = 0; i < data.length; i++) {
 		if (data[i].id === id) {
 			data.splice(i, 1);
+			break;
 		}
 	}
 }
@@ -53,6 +61,7 @@ function updateState(id, state) {
 	for (let i = 0; i < todos.length; i++) {
 		if (todos[i].id === id) {
 			todos[i].state = state;
+			break;
 		}
 	}
 }
@@ -64,15 +73,15 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-	let todos = readToDos();
-	array.forEach((element) => {
+	readToDos().forEach((element) => {
 		io.emit("add-new-to-do", element);
 	});
 
 	socket.on("new-to-do", (msg, state) => {
-		io.emit("add-new-to-do", toDoId, msg, state);
+		let newToDo = { id: toDoCount++, name: msg, state: false }
+		io.emit("add-new-to-do", newToDo);
 		let todos = readToDos();
-		todos.push({ id: toDoId++, name: msg, state: false });
+		todos.push(newToDo);
 		writeToDos(todos);
 	});
 	socket.on("delete-to-do", (id) => {
@@ -80,7 +89,6 @@ io.on("connection", (socket) => {
 		let todos = readToDos();
 		deleteToDo(id);
 		writeToDos(todos);
-
 	});
 	socket.on("check-to-do", (id, state) => {
 		io.emit("check-to-do-item", id, state);

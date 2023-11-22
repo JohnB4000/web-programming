@@ -38,7 +38,8 @@
 
 		// todos[i].id, todos[i].name, todos[i].state
 		socket.on("add-new-to-do", function (newToDo) {
-			if (toDoIds.includes(toDoId)) 
+			console.log(newToDo)
+			if (toDoIds.includes(newToDo.id)) 
 				return
 			
 			toDoIds.push(newToDo.id)
