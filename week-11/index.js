@@ -73,26 +73,23 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-	readToDos().forEach((element) => {
+	toDos.forEach((element) => {
 		io.emit("add-new-to-do", element);
 	});
 
 	socket.on("new-to-do", (msg, state) => {
 		let newToDo = { id: toDoCount++, name: msg, state: state }
 		io.emit("add-new-to-do", newToDo);
-		let todos = readToDos();
-		todos.push(newToDo);
-		writeToDos(todos);
+		toDos.push(newToDo);
+		writeToDos(toDos);
 	});
 	socket.on("delete-to-do", (id) => {
 		io.emit("delete-to-do-item", id);
-		let toDos = readToDos();
 		deleteToDo(toDos, id);
 		writeToDos(toDos);
 	});
 	socket.on("check-to-do", (id, state) => {
 		io.emit("check-to-do-item", id, state);
-		let toDos = readToDos();
 		updateState(toDos, id, state);
 		writeToDos(toDos);
 	});
